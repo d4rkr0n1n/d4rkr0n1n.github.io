@@ -1,9 +1,11 @@
 import { Box } from "./Box";
 import { Content } from "./Content"
 
-export default function Layout  ({ children }){return (
+export  const Layout = ({ children }) =>  (
   <Box>
     {children}
     <Content />
   </Box>
-)};
+);
+
+export default Layout;

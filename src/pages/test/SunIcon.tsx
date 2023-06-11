@@ -57,3 +57,5 @@ export const SunIcon = ({
     </svg>
   );
 };
+
+export default SunIcon;
