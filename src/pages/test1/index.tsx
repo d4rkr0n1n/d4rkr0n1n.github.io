@@ -6,7 +6,7 @@ export default function IndexPage(props) {
     <Link href="./t.sh">
       t.sh
     </Link>
-    <Link href="/t.sh">
+    <Link href="/test1/t.sh">
     t.sh
   </Link>
   <Link href="test/favicon.ico">
