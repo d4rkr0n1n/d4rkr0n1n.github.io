@@ -6,9 +6,12 @@ const Arrow = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h1
 const Spark = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 1.7 6.3L20 10l-6.3 1.7L12 18l-1.7-6.3L4 10l6.3-1.7L12 2Z" /></svg>;
 
 const work = [
-  { title: "Cloud Platform", type: "AWS · Terraform · Kubernetes", year: "2024", className: "aster", mark: "CP" },
-  { title: "Delivery Pipeline", type: "CI/CD · GitHub Actions · Docker", year: "2024", className: "moss", mark: "CI" },
-  { title: "Observability Stack", type: "Prometheus · Grafana · Linux", year: "2023", className: "luma", mark: "OS" },
+  { title: "pulse-api", type: "API service", year: "2025", className: "aster", mark: "PA" },
+  { title: "server-performance-stats", type: "Server monitoring", year: "2025", className: "moss", mark: "SP" },
+  { title: "log-archive-tool", type: "Log automation", year: "2025", className: "luma", mark: "LA" },
+  { title: "nginx-log-analyser", type: "Log analysis", year: "2025", className: "aster", mark: "NL" },
+  { title: "gh-deployment-workflow", type: "Deployment automation", year: "2025", className: "moss", mark: "GH" },
+  { title: "ssh-remote-server-setup", type: "Server provisioning", year: "2025", className: "luma", mark: "SSH" },
 ];
 
 export default function Home() {
