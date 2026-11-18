@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   description,
   authors: [{ name: "Mridul Roy", url: siteUrl }],
   alternates: { canonical: "/" },
-  openGraph: { title: "Mridul Roy / Systems Engineer", description: "I make systems behave. Usually.", url: "/", siteName: "Mridul Roy", locale: "en_IN", type: "website", images: [ogImage] },
-  twitter: { card: "summary_large_image", title: "Mridul Roy / Systems Engineer", description: "I make systems behave. Usually.", images: [ogImage] },
+  openGraph: { title: "Mridul Roy / Forward Deployed Engineer", description: "I make systems behave. Usually.", url: "/", siteName: "Mridul Roy", locale: "en_IN", type: "website", images: [ogImage] },
+  twitter: { card: "summary_large_image", title: "Mridul Roy / Forward Deployed Engineer", description: "I make systems behave. Usually.", images: [ogImage] },
 };
 
 export const viewport: Viewport = { themeColor: "#080b0b", colorScheme: "dark" };

@@ -71,7 +71,7 @@ Loaded with `next/font/google` in `app/layout.tsx`.
 Order in `app/page.tsx`:
 
 1. Announcement bar (`// ... //` joke line)
-2. Sticky header: logo `M_` with a blinking cursor, `/ABOUT /WORK /EXPERIENCE /CONTACT`, availability dot, "INITIATE CONTACT" CTA
+2. Sticky header: logo `M_` with a blinking cursor, `/ABOUT /WORK /EXPERIENCE /CONTACT`, availability dot, "INITIATE CONTACT" CTA that opens the contact modal
 3. Hero (`#top`): headline and CTAs on the left, interactive `<Terminal/>` on the right
 4. Stats strip
 5. `01 / WHO AM I` (`#about`)
@@ -79,7 +79,7 @@ Order in `app/page.tsx`:
 7. `03 / THE TOOLBOX`: stack chips
 8. `04 / CHANGELOG` (`#experience`): timeline
 9. `05 / OPEN CONNECTION` (`#contact`): CTA panel
-10. Footer with a live IST clock
+10. Footer with a live IST clock and a dim `// INSPIRED BY BERTRAM GILFOYLE` credit line (the only on-page reference)
 
 New sections take the next number in the `NN / LABEL` convention via `.section-label`.
 
@@ -98,8 +98,15 @@ New sections take the next number in the `NN / LABEL` convention via `.section-l
 | **Status dot** | `h-1.5 w-1.5 rounded-full bg-phosphor`, optionally `animate-pulse` |
 | **Timeline** | `border-l` rail with ring dots (`border-2 border-phosphor`) placed with negative left offsets |
 | **Terminal** | `components/Terminal.tsx`: macOS-style traffic lights, `role="log"` with `aria-live="polite"`, command map, `clear` resets history, unknown commands print `command not found` |
+| **Modal** | `components/ContactModal.tsx`: `bg-void/80 backdrop-blur-sm` overlay, `.shell-card rounded-xl shadow-glow` panel with `animate-rise`, a terminal-style title bar (`~/mridul/contact`) and status bar (`esc to close` / `● listening`). Rows reuse the card icon tile and turn `hover:border-phosphor/55`. `role="dialog"` with `aria-modal`, focus trap, Escape and backdrop click close it, body scroll is locked |
 
 Icons come from `lucide-react`, mostly 12–22px. Arrows (`ArrowUpRight`, `ArrowRight`) mark actions.
+
+## Brand assets
+
+- **Favicon** (`app/icon.svg`): the `M_` logo in phosphor on a `#0e1312` rounded square with a `phosphor/55` border. It's built to stay legible at 16px.
+- **Link-preview image** (`app/og.png/route.tsx`, 1200×630): `void` background with the 52px grid, logo and domain on top, the hero headline with **SYSTEMS** and the period in phosphor, and a role line with an `● ONLINE` status at the bottom. It uses the default `next/og` font, since Space Grotesk isn't bundled.
+- **Theme colour:** `#080b0b` (`viewport.themeColor`).
 
 ## Motion
 
