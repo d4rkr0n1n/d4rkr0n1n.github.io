@@ -1,60 +1,73 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronRight, Clipboard, Code2, Cpu, Github, Linkedin, LockKeyhole, Mail, Menu, Server, Shield, TerminalSquare, X, Zap } from "lucide-react";
+import { Terminal } from "@/components/Terminal";
 
-const Arrow = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>;
-const Spark = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 1.7 6.3L20 10l-6.3 1.7L12 18l-1.7-6.3L4 10l6.3-1.7L12 2Z" /></svg>;
-
-const work = [
-  { title: "pulse-api", type: "API service", year: "2025", className: "aster", mark: "PA" },
-  { title: "server-performance-stats", type: "Server monitoring", year: "2025", className: "moss", mark: "SP" },
-  { title: "log-archive-tool", type: "Log automation", year: "2025", className: "luma", mark: "LA" },
-  { title: "nginx-log-analyser", type: "Log analysis", year: "2025", className: "aster", mark: "NL" },
-  { title: "gh-deployment-workflow", type: "Deployment automation", year: "2025", className: "moss", mark: "GH" },
-  { title: "ssh-remote-server-setup", type: "Server provisioning", year: "2025", className: "luma", mark: "SSH" },
+const stack = ["AWS", "AZURE", "GCP", "TERRAFORM", "DOCKER", "JENKINS", "GITHUB ACTIONS", "HASHICORP VAULT", "SONARQUBE", "KAFKA", "REDIS", "OLLAMA"];
+const experiences = [
+  { company: "STATE BANK OF INDIA", role: "DevSecOps Engineer", period: "2024 — 2026", desc: "Helped teams translate security requirements into practical platform designs. Evaluated DevSecOps tooling, reviewed rollout strategies and performance dashboards, and trained teams on secure-by-design practices.", tags: ["DEVSECOPS", "PLATFORM ENGINEERING", "SECURITY"] },
+  { company: "TATA CONSULTANCY SERVICES", role: "DevOps Engineer", period: "2021 — 2024", desc: "Migrated APIs to Kotlin/Spring Boot, moved secrets into Vault, automated Java delivery using Jenkins and GitHub Actions, and worked on cloud-native migration and infrastructure across AWS, Azure, and GCP.", tags: ["CI/CD", "CLOUD MIGRATION", "AUTOMATION"] },
+];
+const projects = [
+  { number: "01", icon: Shield, eyebrow: "SECURE DELIVERY", title: "Pipelines that don't betray you.", description: "CI/CD workflows, automated quality checks, and secrets management. The boring parts that prevent very exciting incidents.", tools: ["JENKINS", "GITHUB ACTIONS", "VAULT", "SONARQUBE"], note: "EXPERIENCE-BASED WORK" },
+  { number: "02", icon: Server, eyebrow: "CLOUD INFRASTRUCTURE", title: "Move fast. Break fewer things.", description: "Container deployments, Terraform-provisioned infrastructure, and modernization of legacy services into cloud-native systems.", tools: ["TERRAFORM", "DOCKER", "AWS", "AZURE"], note: "EXPERIENCE-BASED WORK" },
+  { number: "03", icon: Cpu, eyebrow: "PERSONAL HOMELAB", title: "AI, without the magic tricks.", description: "Experimenting with locally hosted LLMs, agent tooling, and observability. Built to understand the machinery, not just the demos.", tools: ["OLLAMA", "LANGFUSE", "LOCAL LLMS"], note: "ONGOING EXPLORATION" },
 ];
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  return <main>
-    <nav className="nav">
-      <a className="wordmark" href="#top">mridul<span>roy</span></a>
-      <div className={menuOpen ? "links active" : "links"}>
-        <a href="#work" onClick={() => setMenuOpen(false)}>Projects</a>
-        <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-        <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+  const [copied, setCopied] = useState(false);
+  const [clock, setClock] = useState("--:--:--");
+  useEffect(() => {
+    const update = () => setClock(new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).format(new Date()));
+    update(); const interval = setInterval(update, 1000); return () => clearInterval(interval);
+  }, []);
+  async function copyEmail() {
+    try { await navigator.clipboard.writeText("midlry.mr@gmail.com"); setCopied(true); setTimeout(() => setCopied(false), 1700); }
+    catch { window.location.href = "mailto:midlry.mr@gmail.com"; }
+  }
+  return (
+    <main className="min-h-screen overflow-x-hidden bg-void text-cream">
+      <div className="fixed inset-0 pointer-events-none grid-bg opacity-40" />
+      <div className="relative z-10">
+        <div className="border-b border-line/80 bg-[#0d120f] px-5 py-2 text-center font-mono text-[9px] uppercase tracking-[.15em] text-[#839a85] sm:text-[10px]">// THIS WEBSITE USES ZERO BLOCKCHAIN. YOU&apos;RE WELCOME. //</div>
+        <header className="sticky top-0 z-40 border-b border-line/80 bg-void/90 backdrop-blur-xl">
+          <div className="mx-auto flex h-[74px] max-w-[1320px] items-center justify-between px-5 sm:px-8 lg:px-12">
+            <a href="#top" className="group flex items-center gap-3" aria-label="Go to top"><span className="flex h-9 w-9 items-center justify-center rounded-md border border-phosphor/50 bg-phosphor/10 font-bold text-phosphor">M<span className="animate-blink">_</span></span><span className="text-sm font-medium tracking-[-.04em]">MRIDUL<span className="text-phosphor">.</span>ROY</span></a>
+            <nav className="hidden items-center gap-9 text-[11px] text-faded md:flex" aria-label="Main navigation"><a className="hover:text-phosphor" href="#about">/ABOUT</a><a className="hover:text-phosphor" href="#work">/WORK</a><a className="hover:text-phosphor" href="#experience">/EXPERIENCE</a><a className="hover:text-phosphor" href="#contact">/CONTACT</a></nav>
+            <div className="hidden items-center gap-4 md:flex"><span className="flex items-center gap-2 text-[10px] text-faded"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-phosphor"/>AVAILABLE FOR PROJECTS</span><a href="mailto:midlry.mr@gmail.com" className="flex items-center gap-2 rounded-md border border-phosphor px-4 py-2.5 text-[10px] font-medium text-phosphor transition-colors hover:bg-phosphor hover:text-void">INITIATE CONTACT <ArrowUpRight size={13}/></a></div>
+            <button className="p-2 text-phosphor md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle menu">{menuOpen ? <X size={21}/> : <Menu size={21}/>}</button>
+          </div>
+          {menuOpen && <nav className="flex flex-col border-t border-line bg-surface px-6 py-4 text-xs md:hidden" aria-label="Mobile navigation">{[["ABOUT","about"],["WORK","work"],["EXPERIENCE","experience"],["CONTACT","contact"]].map(([label, id]) => <a onClick={() => setMenuOpen(false)} key={id} href={`#${id}`} className="border-b border-line py-4 text-faded">/{label}</a>)}</nav>}
+        </header>
+
+        <section id="top" className="relative mx-auto grid max-w-[1320px] gap-12 px-5 pb-24 pt-20 sm:px-8 lg:grid-cols-[1.07fr_.93fr] lg:gap-16 lg:px-12 lg:pb-32 lg:pt-28">
+          <div className="relative animate-rise">
+            <div className="mb-8 flex items-center gap-3 text-[10px] uppercase tracking-[.21em] text-phosphor"><span className="h-px w-10 bg-phosphor"/> THE HUMAN BEHIND THE TERMINAL</div>
+            <h1 className="font-sans text-[clamp(3.6rem,7vw,7rem)] font-bold leading-[.94] tracking-[-.085em]">I MAKE<br/><span className="text-phosphor glow-text">SYSTEMS</span><br/>BEHAVE<span className="text-phosphor">.</span></h1>
+            <p className="mt-8 max-w-[500px] text-sm leading-8 text-[#a0afa3] sm:text-[15px]">Infrastructure. Security. Delivery. The unglamorous engineering that keeps everything else from falling apart.</p>
+            <p className="mt-4 text-xs text-[#687e70]">Forward Deployed Engineer <span className="mx-2 text-phosphor">/</span> Ex-DevSecOps @ SBI <span className="mx-2 text-phosphor">/</span> Based in India</p>
+            <div className="mt-10 flex flex-wrap gap-3"><a href="#work" className="flex items-center gap-3 rounded-md bg-phosphor px-6 py-4 text-[11px] font-bold text-void transition-transform hover:-translate-y-1">INSPECT MY WORK <ArrowUpRight size={16}/></a><a href="#contact" className="flex items-center gap-3 rounded-md border border-[#3a4b3e] px-6 py-4 text-[11px] text-cream transition-colors hover:border-phosphor">LET&apos;S TALK <ArrowRight size={15}/></a></div>
+            <div className="mt-16 flex flex-wrap gap-8 border-t border-line pt-7 text-[10px] text-[#799181]"><span><span className="text-phosphor">●</span> SYSTEMS THINKING</span><span><span className="text-phosphor">●</span> SECURITY FIRST</span><span><span className="text-phosphor">●</span> ZERO NONSENSE</span></div>
+          </div>
+          <div className="relative self-center lg:pt-8"><div className="pointer-events-none absolute -right-5 -top-8 hidden font-sans text-[120px] font-bold leading-none text-phosphor/[.035] lg:block">&lt;/&gt;</div><Terminal/><div className="mt-4 flex justify-between text-[9px] uppercase tracking-[.17em] text-[#627568]"><span>LOCALHOST: 127.0.0.1</span><span>NO COOKIES. NO NONSENSE.</span></div></div>
+        </section>
+
+        <div className="border-y border-line bg-[#0f1612]"><div className="mx-auto grid max-w-[1320px] grid-cols-2 gap-4 px-5 py-7 sm:px-8 md:grid-cols-4 lg:px-12">{[{v:"5+",l:"YEARS ENGINEERING"},{v:"3",l:"MAJOR CLOUDS"},{v:"∞",l:"TERMINAL TABS"},{v:"0",l:"PATIENCE FOR BUZZWORDS"}].map((stat) => <div key={stat.l} className="border-l border-[#344339] pl-4 sm:pl-6"><p className="font-sans text-3xl font-bold tracking-tight text-cream">{stat.v}<span className="text-phosphor">.</span></p><p className="mt-1 text-[9px] tracking-[.1em] text-faded">{stat.l}</p></div>)}</div></div>
+
+        <section id="about" className="mx-auto grid max-w-[1320px] gap-14 px-5 py-28 sm:px-8 lg:grid-cols-2 lg:gap-24 lg:px-12"><div><div className="section-label">01 / WHO AM I</div><h2 className="mt-6 font-sans text-4xl font-bold leading-[1.1] tracking-[-.06em] sm:text-6xl">A LITTLE LESS TALK.<br/><span className="text-phosphor">A LOT MORE UPTIME.</span></h2></div><div className="pt-2"><p className="text-base leading-9 text-[#b5c1b8]">I&apos;m Mridul, a forward deployed engineer who&apos;s worked where infrastructure, security, and real-world constraints collide. My specialty is getting technology out of PowerPoint and into production.</p><p className="mt-5 text-sm leading-8 text-[#879b8d]">I&apos;ve worked on enterprise DevSecOps programs, cloud migrations, automated delivery, and secure services. Off the clock, I run experiments with local LLMs and agents in my homelab. Because apparently I needed more systems to maintain.</p><a href="https://github.com/d4rkr0n1n" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 border-b border-phosphor pb-2 text-xs text-phosphor">SEE WHAT I'M BUILDING <ArrowUpRight size={14}/></a></div></section>
+
+        <section id="work" className="border-y border-line bg-[#0b100d]"><div className="mx-auto max-w-[1320px] px-5 py-28 sm:px-8 lg:px-12"><div className="mb-12 flex flex-wrap items-end justify-between gap-6"><div><div className="section-label">02 / SELECTED SYSTEMS</div><h2 className="mt-5 font-sans text-4xl font-bold tracking-[-.07em] sm:text-6xl">PROBLEMS <span className="text-phosphor">SOLVED_</span></h2></div><p className="max-w-[310px] text-xs leading-6 text-faded">Representative engineering work and technical explorations. No invented customer metrics.</p></div><div className="grid gap-4 lg:grid-cols-3">{projects.map((p) => { const Icon = p.icon; return <article key={p.number} className="group relative flex min-h-[390px] flex-col overflow-hidden rounded-lg border border-line bg-[#101712] p-7 transition-all hover:-translate-y-1 hover:border-phosphor/55 hover:shadow-glow"><div className="mb-12 flex items-start justify-between"><div className="flex h-12 w-12 items-center justify-center rounded-md border border-[#3b5240] bg-[#18241a] text-phosphor"><Icon size={22}/></div><span className="font-sans text-5xl font-bold text-[#28362b]">{p.number}</span></div><p className="text-[10px] tracking-[.15em] text-phosphor">{p.eyebrow}</p><h3 className="mt-4 font-sans text-2xl font-bold leading-tight tracking-[-.05em]">{p.title}</h3><p className="mt-4 text-xs leading-7 text-[#8fa393]">{p.description}</p><div className="mt-auto flex flex-wrap gap-2 pt-8">{p.tools.map((tool) => <span key={tool} className="tag">{tool}</span>)}</div><div className="mt-6 flex items-center gap-2 border-t border-line pt-4 text-[9px] tracking-[.1em] text-[#697d6b]"><Check size={12} className="text-phosphor"/>{p.note}</div></article>; })}</div></div></section>
+
+        <section className="mx-auto max-w-[1320px] px-5 py-28 sm:px-8 lg:px-12"><div className="section-label">03 / THE TOOLBOX</div><div className="mt-5 flex flex-wrap items-end justify-between gap-4"><h2 className="font-sans text-4xl font-bold tracking-[-.07em] sm:text-6xl">TOOLS <span className="text-phosphor">OF THE TRADE.</span></h2><p className="text-xs text-faded">Not all hammers. Some are fire extinguishers.</p></div><div className="mt-12 flex flex-wrap gap-3">{stack.map((item, i) => <span key={item} className={`rounded-md border px-4 py-3 text-[11px] tracking-wide transition-colors hover:border-phosphor hover:text-phosphor ${i % 4 === 0 ? "border-phosphor/35 bg-phosphor/[.06] text-[#cce6b5]" : "border-line bg-surface text-[#9aada0]"}`}>{i % 4 === 0 && <span className="mr-2 text-phosphor">+</span>}{item}</span>)}</div></section>
+
+        <section id="experience" className="border-y border-line bg-[#0b100d]"><div className="mx-auto grid max-w-[1320px] gap-12 px-5 py-28 sm:px-8 lg:grid-cols-[.65fr_1.35fr] lg:gap-24 lg:px-12"><div><div className="section-label">04 / CHANGELOG</div><h2 className="mt-5 font-sans text-4xl font-bold tracking-[-.07em] sm:text-6xl">PREVIOUS<br/><span className="text-phosphor">DEPLOYMENTS.</span></h2><p className="mt-7 max-w-xs text-sm leading-7 text-faded">A brief history of convincing computers and humans to cooperate.</p></div><div className="relative border-l border-[#35453a] pl-7 sm:pl-10">{experiences.map((e) => <div key={e.company} className="relative pb-14 last:pb-0"><span className="absolute -left-[34px] top-1 h-3 w-3 rounded-full border-2 border-phosphor bg-[#0b100d] sm:-left-[46px]"/><div className="flex flex-wrap items-center justify-between gap-3"><span className="text-[10px] tracking-[.14em] text-phosphor">{e.company}</span><span className="text-[10px] text-[#697e6c]">{e.period}</span></div><h3 className="mt-3 font-sans text-2xl font-semibold tracking-tight sm:text-3xl">{e.role}</h3><p className="mt-4 max-w-[610px] text-sm leading-8 text-[#95a99a]">{e.desc}</p><div className="mt-5 flex flex-wrap gap-2">{e.tags.map((t) => <span key={t} className="tag">{t}</span>)}</div></div>)}</div></div></section>
+
+        <section id="contact" className="mx-auto max-w-[1320px] px-5 py-28 sm:px-8 lg:px-12"><div className="relative overflow-hidden rounded-xl border border-phosphor/30 bg-[#101a12] px-7 py-16 sm:px-14 lg:px-20"><div className="absolute -right-14 -top-32 h-[400px] w-[400px] rounded-full bg-phosphor/[.06] blur-3xl"/><div className="relative z-10"><div className="section-label">05 / OPEN CONNECTION</div><h2 className="mt-6 max-w-4xl font-sans text-[clamp(2.7rem,6vw,5.6rem)] font-bold leading-[1] tracking-[-.08em]">GOT A HARD PROBLEM?<br/><span className="text-phosphor">GOOD.</span></h2><p className="mt-7 max-w-xl text-sm leading-8 text-[#a4b9a7]">Need someone to untangle infrastructure, build reliable delivery pipelines, or get an engineering idea into the real world? Send the details. Skip the corporate poetry.</p><div className="mt-10 flex flex-wrap gap-3"><a href="mailto:midlry.mr@gmail.com" className="inline-flex items-center gap-3 rounded-md bg-phosphor px-6 py-4 text-xs font-bold text-void hover:bg-[#d1ff9e]"><Mail size={16}/> SEND AN EMAIL <ArrowUpRight size={16}/></a><button onClick={copyEmail} className="inline-flex items-center gap-3 rounded-md border border-[#415344] px-6 py-4 text-xs text-[#c5d8c7] hover:border-phosphor">{copied ? <Check size={15}/> : <Clipboard size={15}/>} {copied ? "COPIED TO CLIPBOARD" : "COPY EMAIL"}</button></div><div className="mt-12 flex flex-wrap items-center gap-6 text-xs text-[#8b9c8e]"><a href="https://github.com/d4rkr0n1n" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-phosphor"><Github size={17}/> GITHUB <ArrowUpRight size={12}/></a><a href="https://linkedin.com/in/d4rkr0n1n" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-phosphor"><Linkedin size={17}/> LINKEDIN <ArrowUpRight size={12}/></a></div></div></div></section>
+
+        <footer className="border-t border-line"><div className="mx-auto flex max-w-[1320px] flex-col justify-between gap-5 px-5 py-8 text-[10px] tracking-[.08em] text-[#728576] sm:px-8 md:flex-row md:items-center lg:px-12"><span>© {new Date().getFullYear()} MRIDUL ROY. ALL SYSTEMS NOMINALLY OPERATIONAL.</span><span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-phosphor"/> IST <span className="text-phosphor">{clock}</span></span><a href="#top" className="flex items-center gap-2 hover:text-phosphor">BACK TO THE TOP <ArrowUpRight size={12}/></a></div></footer>
       </div>
-      <button className="menu" aria-label="Toggle menu" onClick={() => setMenuOpen(!menuOpen)}><i /><i /></button>
-    </nav>
-
-    <section className="hero" id="top">
-      <div className="hero-intro"><span className="eyebrow"><Spark /> DevOps Engineer</span><span>(Building reliable systems / working worldwide)</span></div>
-      <h1>Shipping software<br />with <em>confidence.</em></h1>
-      <div className="hero-bottom"><p>I design reliable cloud infrastructure and delivery workflows that help engineering teams move faster, safely.</p><a className="round-link" href="#work" aria-label="See projects"><Arrow /></a></div>
-      <div className="orb orb-one" /><div className="orb orb-two" />
-    </section>
-
-    <section className="work" id="work">
-      <div className="section-head"><span className="index">01 / Selected projects</span><p>A selection of infrastructure and automation work built for teams that need to scale with confidence.</p></div>
-      <div className="project-grid">
-        {work.map((project) => <article className="project" key={project.title}>
-          <div className={`project-visual ${project.className}`}><div className="visual-mark">{project.mark}</div><span className="view">Explore project <Arrow /></span></div>
-          <div className="project-info"><div><h2>{project.title}</h2><p>{project.type}</p></div><span>{project.year}</span></div>
-        </article>)}
-      </div>
-    </section>
-
-    <section className="about" id="about">
-      <span className="index">02 / About me</span>
-      <div className="about-copy"><h2>I turn complex infrastructure into <em>calm, dependable</em> systems.</h2><p>I&apos;m Mridul Roy, a DevOps Engineer focused on automation, cloud platforms, and observability. I help teams build faster release cycles without compromising resilience.</p><a className="text-link" href="#contact">Let&apos;s connect <Arrow /></a></div>
-      <div className="stamp">✦<br />BUILD<br />RUN<br />IMPROVE</div>
-    </section>
-
-    <section className="contact" id="contact">
-      <span className="eyebrow"><Spark /> Have an infrastructure challenge?</span>
-      <h2>Let&apos;s build systems<br /><em>that keep moving.</em></h2>
-      <span className="email">Open to opportunities <Arrow /></span>
-      <footer><span>© 2026 Mridul Roy</span><span>Built for reliability & scale</span><div><a href="#">GitHub</a><a href="#">LinkedIn</a></div></footer>
-    </section>
-  </main>;
+    </main>
+  );
 }
