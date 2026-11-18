@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, ChevronRight, Clipboard, Code2, Cpu, Github, Linkedin, LockKeyhole, Mail, Menu, Server, Shield, TerminalSquare, X, Zap } from "lucide-react";
 import { Terminal } from "@/components/Terminal";
+import { ContactModal } from "@/components/ContactModal";
 
 const stack = ["AWS", "AZURE", "GCP", "TERRAFORM", "DOCKER", "JENKINS", "GITHUB ACTIONS", "HASHICORP VAULT", "SONARQUBE", "KAFKA", "REDIS", "OLLAMA"];
 const experiences = [
@@ -18,6 +19,8 @@ const projects = [
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+  const closeContact = useCallback(() => setContactOpen(false), []);
   const [clock, setClock] = useState("--:--:--");
   useEffect(() => {
     const update = () => setClock(new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).format(new Date()));
@@ -36,7 +39,7 @@ export default function Home() {
           <div className="mx-auto flex h-[74px] max-w-[1320px] items-center justify-between px-5 sm:px-8 lg:px-12">
             <a href="#top" className="group flex items-center gap-3" aria-label="Go to top"><span className="flex h-9 w-9 items-center justify-center rounded-md border border-phosphor/50 bg-phosphor/10 font-bold text-phosphor">M<span className="animate-blink">_</span></span><span className="text-sm font-medium tracking-[-.04em]">MRIDUL<span className="text-phosphor">.</span>ROY</span></a>
             <nav className="hidden items-center gap-9 text-[11px] text-faded md:flex" aria-label="Main navigation"><a className="hover:text-phosphor" href="#about">/ABOUT</a><a className="hover:text-phosphor" href="#work">/WORK</a><a className="hover:text-phosphor" href="#experience">/EXPERIENCE</a><a className="hover:text-phosphor" href="#contact">/CONTACT</a></nav>
-            <div className="hidden items-center gap-4 md:flex"><span className="flex items-center gap-2 text-[10px] text-faded"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-phosphor"/>AVAILABLE FOR PROJECTS</span><a href="mailto:midlry.mr@gmail.com" className="flex items-center gap-2 rounded-md border border-phosphor px-4 py-2.5 text-[10px] font-medium text-phosphor transition-colors hover:bg-phosphor hover:text-void">INITIATE CONTACT <ArrowUpRight size={13}/></a></div>
+            <div className="hidden items-center gap-4 md:flex"><span className="flex items-center gap-2 text-[10px] text-faded"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-phosphor"/>AVAILABLE FOR PROJECTS</span><button onClick={() => setContactOpen(true)} aria-haspopup="dialog" className="flex items-center gap-2 rounded-md border border-phosphor px-4 py-2.5 text-[10px] font-medium text-phosphor transition-colors hover:bg-phosphor hover:text-void">INITIATE CONTACT <ArrowUpRight size={13}/></button></div>
             <button className="p-2 text-phosphor md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle menu">{menuOpen ? <X size={21}/> : <Menu size={21}/>}</button>
           </div>
           {menuOpen && <nav className="flex flex-col border-t border-line bg-surface px-6 py-4 text-xs md:hidden" aria-label="Mobile navigation">{[["ABOUT","about"],["WORK","work"],["EXPERIENCE","experience"],["CONTACT","contact"]].map(([label, id]) => <a onClick={() => setMenuOpen(false)} key={id} href={`#${id}`} className="border-b border-line py-4 text-faded">/{label}</a>)}</nav>}
@@ -68,6 +71,7 @@ export default function Home() {
 
         <footer className="border-t border-line"><div className="mx-auto flex max-w-[1320px] flex-col justify-between gap-5 px-5 py-8 text-[10px] tracking-[.08em] text-[#728576] sm:px-8 md:flex-row md:items-center lg:px-12"><span>© {new Date().getFullYear()} MRIDUL ROY. ALL SYSTEMS NOMINALLY OPERATIONAL.</span><span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-phosphor"/> IST <span className="text-phosphor">{clock}</span></span><a href="#top" className="flex items-center gap-2 hover:text-phosphor">BACK TO THE TOP <ArrowUpRight size={12}/></a></div></footer>
       </div>
+      <ContactModal open={contactOpen} onClose={closeContact} />
     </main>
   );
 }

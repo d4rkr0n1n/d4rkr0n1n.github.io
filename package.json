@@ -1,7 +1,8 @@
 {
-  "name": "gilfoyle-inspired-portfolio",
+  "name": "d4rkr0n1n",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
